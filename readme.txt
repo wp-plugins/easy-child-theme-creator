@@ -26,7 +26,7 @@ Features:
  * Upload the plugin files to the '/wp-content/plugins/' directory
  * Activate the plugin through the 'Plugins' menu in WordPress
  
- == Frequently Asked Questions ==
+== Frequently Asked Questions ==
 
 = Do I need to change the directory permissions to make this work perfect ? =
 
@@ -48,3 +48,7 @@ Our code generates just style.css (With specified Options), functions.php (with 
   
 = 1.0 =
 First Release
+
+== Screenshots ==
+1.  Easy Child Theme Creator - Admin Menu
+2.  Easy Child Theme Creator - Options
