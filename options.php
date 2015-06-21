@@ -1,16 +1,25 @@
 <?php
-$dir = get_theme_root ();
+$dir = get_theme_root();
 
 $files = scandir ( $dir, 1 );
 
 foreach ( $files as $file ) 
-
 {
 	preg_match_all ( '/^.*child.*$/im', $file, $matches, PREG_PATTERN_ORDER );
 	
 	if ($file != 'index.php' && $file != '.' && $file != '..' && $matches [0] [0] == '') {
 		
 		$opts .= '<option value="' . $file . '">' . $file . '</option>';
+	}
+}
+
+$current_theme_dir = get_stylesheet_directory();
+$ectheme = scandir ( $current_theme_dir, 1 );
+foreach ( $files as $file )
+{
+	if ($file == 'screenshot.png' && $file != '.' && $file != '..' && $matches [0] [0] == '') {
+	
+		$screenshot = $scfile;
 	}
 }
 
@@ -23,11 +32,11 @@ if (isset ( $_POST ["submit"] )) {
 	$ect_url = $_POST['ect_themeurl'] != '' ?  $_POST['ect_themeurl'] : 'http://ashokg.in';
 	$ect_author = $_POST['ect_author'] !='' ? $_POST['ect_author'] : 'wpashokg' ;
 	$ect_author_url = $_POST['ect_authurl'] !='' ? $_POST['ect_authurl'] : 'http://ashokg.in';
+	$new_themename = str_replace(' ', '-', strtolower($ect_title))."-".$ect_show."-child";
 	
-	
-	$dir_name = $dir . "/" . $ect_show . "-child";
+	$dir_name = $dir . "/" . $new_themename;
 	if (file_exists ( $dir_name )) {
-		echo '<div id="message" class="error fade"><p>Child Theme ' . $dir_name . ' Already Exists.</p></div>';
+		echo '<div id="message" class="error fade"><p>Child Theme ' . $new_themename . ' Already Exists.</p></div>';
 	} else {
 		//update_option ( $ect_parent, $ect_show );
 		mkdir ( $dir_name, 0755 );
@@ -63,34 +72,40 @@ function theme_enqueue_styles() {
 }
 
 /* Submit Actions */
+$donation = '<div class="donate"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RTAAFGGL53DMG" target ="_blank"><img src="'.plugins_url( 'paypal-donate-button.png', __FILE__ ).'" title="make a donation" alt="make a donation"/></a></div>';
 ?>
 <div class="wrap">
 <?php screen_icon(); ?>
 <h2>Welcome To Easy Child Theme Creator</h2>
+
 </div>
 <?php if(isset($_GET['action'])) { $menu = $_GET['action']; } else { $menu = ''; } ?>
 <h2 class="nav-tab-wrapper">
+	<a href="?page=easy-ctc&action=overview"
+		class="nav-tab <?php if($menu=='overview' || $menu == '') { echo 'nav-tab-active'; } ?>">Overview</a>
 	<a href="?page=easy-ctc&action=create"
 		class="nav-tab <?php if($menu=='create') { echo 'nav-tab-active'; } ?>">Create
-		Child Theme</a> <a href="?page=easy-ctc&action=overview"
-		class="nav-tab <?php if($menu=='overview' || $menu == '') { echo 'nav-tab-active'; } ?>">Overview</a>
+		Child Theme</a> 
+		<a href="?page=easy-ctc&action=create-template"
+		class="nav-tab <?php if($menu=='create-template') { echo 'nav-tab-active'; } ?>">Create
+		Template</a>
 </h2>
 <?php if($menu=='create') { ?>
 <fieldset>
-	<legend>Select A Parent Theme</legend>
+<?php echo $donation; ?>
 	<form method="post" action="">
 		<p>
 			<label for="ect_ptheme" class="ect_label">Parent Theme</label>: <select
-				id="ect_ptheme" name="ect_parenttheme"><option value="">Select A
+				id="ect_ptheme" name="ect_parenttheme" required><option value="" >Select A
 					Parent Theme</option><?php echo $opts; ?></select>
 		</p>
 		<p>
 			<label for="ect_ctheme" class="ect_label">Title</label>: <input
-				type="text" name="ect_childtheme" id="ect_ctheme">
+				type="text" name="ect_childtheme" id="ect_ctheme" pattern="[a-zA-Z0-9\s]+" oninvalid="setCustomValidity('Only Alphanumeric is allowed with Spaces ')" onchange="try{setCustomValidity('')}catch(e){}" />
 		</p>
 		<p>
 			<label for="ect_themeurl" class="ect_label">Theme Uri</label>: <input
-				type="text" name="ect_themeurl" id="ect_themeurl" value="http://ashokg.in">
+				type="url" name="ect_themeurl" id="ect_themeurl" value="http://ashokg.in">
 		</p>
 		<p>
 			<label for="ect_author" class="ect_label">Author</label>: <input
@@ -98,7 +113,7 @@ function theme_enqueue_styles() {
 		</p>
 		<p>
 			<label for="ect_authurl" class="ect_label">Author Url</label>: <input
-				type="text" name="ect_authurl" id="ect_authurl"
+				type="url" name="ect_authurl" id="ect_authurl"
 				value="http://ashokg.in">
 		</p>
 
@@ -112,6 +127,7 @@ function theme_enqueue_styles() {
 
 <?php if($menu=='overview' || $menu=='') { ?>
 <fieldset>
+	<?php echo $donation; ?>
 	<h2>OverView</h2>
 	<p>Welcome to Easy Child Theme Creator!</p>
 	<p>This is a simple effort to create a child theme easily so that it
@@ -126,4 +142,17 @@ function theme_enqueue_styles() {
 	</ul>
 	</p>
 </fieldset>
+<?php   }  ?>
+<?php if($menu=='create-template') { ?>
+<fieldset>
+	<?php echo $donation; ?>
+	<h2>Create Custom Templates</h2>
+	<img src="<?php bloginfo('stylesheet_directory'); ?>/screenshot.png" alt="<?php echo get_current_theme(); ?>" width="400">
+	<pre>
+	<?php
+	$theme = wp_get_theme();
+	print_r($files1);
+	print_r($theme); ?>
+	</pre>
+	</fieldset>
 <?php   }  ?>
