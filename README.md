@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: themes, child themes
 Requires at least: 3.3.1
 Tested up to: 4.2.2 
-Stable tag: 1.1
+Stable tag: 1.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,6 +51,9 @@ First Release
 
 = 1.1 = 
 Fixed form validations, now it supports multiple child theme creation.
+
+= 1.2 =
+Omit the above version it has some bugs. Fixed in the current version. Sorry for the trouble.
 
 == Screenshots ==
 1.  Easy Child Theme Creator - Admin Menu
