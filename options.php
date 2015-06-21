@@ -86,9 +86,9 @@ $donation = '<div class="donate"><a href="https://www.paypal.com/cgi-bin/webscr?
 	<a href="?page=easy-ctc&action=create"
 		class="nav-tab <?php if($menu=='create') { echo 'nav-tab-active'; } ?>">Create
 		Child Theme</a> 
-		<a href="?page=easy-ctc&action=create-template"
+<?php /*		<a href="?page=easy-ctc&action=create-template"
 		class="nav-tab <?php if($menu=='create-template') { echo 'nav-tab-active'; } ?>">Create
-		Template</a>
+		Template</a>*/ ?>
 </h2>
 <?php if($menu=='create') { ?>
 <fieldset>
