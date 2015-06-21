@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Easy_Child_Theme
- * @version 1.0
+ * @version 1.1
  */
 /*
  Plugin Name: Easy Child Theme
  Plugin URI: http://ashokg.in/easy-child-theme
  Description: Hassle Free Child Theme Creator.
  Author: Ashok G
- Version: 1.0
+ Version: 1.1
  Author URI: http://ashokg.in/
  */
 include __DIR__."/functions.php";
