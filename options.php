@@ -86,9 +86,7 @@ $donation = '<div class="donate"><a href="https://www.paypal.com/cgi-bin/webscr?
 	<a href="?page=easy-ctc&action=create"
 		class="nav-tab <?php if($menu=='create') { echo 'nav-tab-active'; } ?>">Create
 		Child Theme</a> 
-<?php /*		<a href="?page=easy-ctc&action=create-template"
-		class="nav-tab <?php if($menu=='create-template') { echo 'nav-tab-active'; } ?>">Create
-		Template</a>*/ ?>
+	
 </h2>
 <?php if($menu=='create') { ?>
 <fieldset>
@@ -142,17 +140,4 @@ $donation = '<div class="donate"><a href="https://www.paypal.com/cgi-bin/webscr?
 	</ul>
 	</p>
 </fieldset>
-<?php   }  ?>
-<?php if($menu=='create-template') { ?>
-<fieldset>
-	<?php echo $donation; ?>
-	<h2>Create Custom Templates</h2>
-	<img src="<?php bloginfo('stylesheet_directory'); ?>/screenshot.png" alt="<?php echo get_current_theme(); ?>" width="400">
-	<pre>
-	<?php
-	$theme = wp_get_theme();
-	print_r($files1);
-	print_r($theme); ?>
-	</pre>
-	</fieldset>
 <?php   }  ?>
